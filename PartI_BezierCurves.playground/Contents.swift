@@ -65,18 +65,22 @@ let P2: Point = (4, 0)
 let P3: Point = (6, 2)
 let P4: Point = (5, 4)
 
-// And here is the partially completed function:
+// More likely the points would be supplied in an array:
+let allPoints = [P0, P1, P2, P3, P4]
 
 func exampleCurve(t: Float) -> Point {
-    let b0 = bernsteinPolynomial(0, 4)(t)
-    let b1 = bernsteinPolynomial(1, 4)(t)
-    let b2 = bernsteinPolynomial(2, 4)(t)
-    let b3 = bernsteinPolynomial(3, 4)(t)
-    let b4 = bernsteinPolynomial(4, 4)(t)
-    
-    return (b0 * P0.x + b1 * P1.x + b2 * P2.x + b3 * P3.x + b4 * P4.x, b0 * P0.y + b1 * P1.y + b2 * P2.y + b3 * P3.y + b4 * P4.y)
+    // Then we can just write a loop that works no matter how many points are in the array.
+    let degree = allPoints.count - 1
+    var sumx: Float = 0
+    var sumy: Float = 0
+    for idx in 0...degree {
+        let b = bernsteinPolynomial(idx, degree)(t)
+        let point = allPoints[idx]
+        sumx += b * point.x
+        sumy += b * point.y
+    }
+    return (sumx, sumy)
 }
-
 /*:
  ## Unit Tests
  */
