@@ -37,7 +37,10 @@ enum FactorialError: ErrorType {
 // And here is the function for you to implement:
 
 func saferFactorial(n: Int) throws -> Int   {
-    return 1
+    guard n != 0 else { return 1 }
+    guard n > 0 else { throw FactorialError.Meaningless }
+    guard n < 21 else { throw FactorialError.TooLarge }
+    return factorial(n)
 }
 
 /*:
