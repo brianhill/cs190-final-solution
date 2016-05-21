@@ -30,6 +30,10 @@ class FactorialGenerator: GeneratorType {
     // E.g., if you have n! and you want (n+1)!, all your code has to do is multiple by n+1.
     // HINT: I made this a ton easier by supplying the FibonacciGenerator example. It's
     // like a template for a good solution.
+    func next() -> Int? {
+        state = (state.result * state.multiplier, state.multiplier + 1)
+        return state.result
+    }
 }
 
 let aFactorialGenerator = FactorialGenerator()
